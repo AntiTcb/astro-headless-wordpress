@@ -1,6 +1,5 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
+import SiteLayout from "./SiteLayout.astro";
 
 export interface Props {
 	content: {
@@ -19,33 +18,26 @@ const {
 } = Astro.props as Props;
 ---
 
-<html>
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-
-	<body>
-		<Header />
-		<article class="wrapper content">
-			<header>
-				{heroImage && (
-					<img
-						width="720"
-						height="420"
-						loading="lazy"
-						src={heroImage.src}
-						alt={heroImage.alt}
-					/>
-				)}
-				<h1 class="title">{title}</h1>
-				<time>{publishDate}</time>
-			</header>
-			<main>
-				<slot></slot>
-			</main>
-		</article>
-	</body>
-</html>
+<SiteLayout title={title} description={description}>
+	<article class="wrapper content">
+		<header>
+			{heroImage && (
+				<img
+					width="720"
+					height="420"
+					loading="lazy"
+					src={heroImage.src}
+					alt={heroImage.alt}
+				/>
+			)}
+			<h1 class="title">{title}</h1>
+			<time>{publishDate}</time>
+		</header>
+		<main>
+			<slot></slot>
+		</main>
+	</article>
+</SiteLayout>
 
 <style>
 	img {
