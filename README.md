@@ -1,12 +1,13 @@
-# Astro Starter Kit: Blog
+# Astro Starter Kit: Headless WordPress
 
-```
-npm init astro -- --template blog
-```
+**UPDATE** This project is using Headless WordPress to query data.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
+**IMPORTANT** In order to have your project work you'll need to replace the api url in: `src/lib/api.ts` 
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### WordPress Setup Instructions
+- Download "Local by Flywheel" or any local WordPress environment.
+- Install "WP GraphQL" plugin so you have api information available.
+- Update the url listed above with your url, **remembering to keep** the "graphql" ending.
 
 Features:
 
