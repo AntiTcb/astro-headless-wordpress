@@ -14,7 +14,7 @@ const { title, description, publishDate, url } = Astro.props as Props;
 		<time>{publishDate}</time>
 		<a href={url}><h1 class="title">{title}</h1></a>
 	</header>
-	<p>{description}</p>
+	<p set:html={description} />
 	<a href={url}>Read more</a>
 </article>
 
