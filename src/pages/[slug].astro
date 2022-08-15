@@ -1,6 +1,6 @@
 ---
-import SiteLayout from "../../layouts/SiteLayout.astro";
-import { queryWordPress } from '../../lib/api';
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { queryWordPress } from '../lib/api';
 import { gql } from 'graphql-request';
 
 type SlugResponse = {posts: {
@@ -13,20 +13,20 @@ type SlugResponse = {posts: {
 // generate all the pages we need.
 export async function getStaticPaths() {
       const query = gql`
-    {
-        posts(first: 10000) {
-          edges {
-            node {
-              slug
+        {
+            posts(first: 10000) {
+                edges {
+                    node {
+                    slug
+                    }
+                }
             }
-          }
         }
-      }
-  `;
-  const slugs = await queryWordPress<SlugResponse>(query);
-  return slugs.posts.edges.map(({node}) => ({
-    params: {slug: node.slug}
-  }))
+    `;
+    const slugs = await queryWordPress<SlugResponse>(query);
+    return slugs.posts.edges.map(({node}) => ({
+        params: {slug: node.slug}
+    }))
 }
 
 // use astro to pull individual slugs

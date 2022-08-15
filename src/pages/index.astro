@@ -5,65 +5,80 @@ import { queryWordPress } from '../lib/api';
 import { gql } from 'graphql-request';
 
 type HomepagePostListQuery = {
-	posts: {
-		edges: {
-			node: {
-				slug: string;
-				title: string;
-				content: string;
-				date: string;
-			}
-		}[]
-	}
-	allSettings: {
-		generalSettingsUrl: string;
-		generalSettingsTitle: string;
-	}
+    posts: {
+        edges: {
+            node: {
+                slug: string;
+                title: string;
+                excerpt: string;
+                content: string;
+                date: Date;
+                featuredImage: {
+                    node: {
+                        mediaItemUrl: string;
+                    }
+                }
+            }
+        }[]
+    }
+    allSettings: {
+        generalSettingsUrl: string;
+        generalSettingsTitle: string;
+    }
 }
 
-let title = "Example Blog";
-let description = "The perfect starter for your perfect blog.";
+let description = "Ending Misinformation";
 
 const query = gql`
   {
-      posts(first: 5) {
+      posts(first: 20) {
         edges {
           node {
             slug
-			title
-			content
-			date
+            title
+            excerpt
+            content
+            date
+            featuredImage {
+                node {
+                    mediaItemUrl
+                }
+            }
           }
         }
       }
-	  allSettings{
-		generalSettingsUrl
-		generalSettingsTitle
-	  }
+      allSettings{
+        generalSettingsUrl
+        generalSettingsTitle
+      }
     }
 `;
 
-const {posts, allSettings} = await queryWordPress<HomepagePostListQuery>(query);
+const { posts, allSettings } = await queryWordPress<HomepagePostListQuery>(query);
 ---
 
 <SiteLayout title={allSettings.generalSettingsTitle} description={description}>
-	<div class="wrapper">
-		<main class="content">
-			<section class="intro">
-				<h1>{allSettings.generalSettingsTitle}</h1>
-				<p>{description}</p>
-			</section>
-			<section>
-				<h2 class="sr-only">Blog post list</h2>
-				{posts.edges.map(({ node }) => (
-					<BlogPostPreview
-						title={node.title}
-						description={node.content}
-						publishDate={node.date}
-						url={`/posts/${node.slug}`}
-					/>
-				))}
-			</section>	
-		</main>
-	</div>
+    <div class="wrapper">
+        <main class="content">
+            <section>
+                {posts.edges.map(({ node }) => (
+                    <BlogPostPreview
+                        title={node.title}
+                        excerpt={node.excerpt}
+                        description={node.content}
+                        publishDate={node.date}
+                        featuredImage={node?.featuredImage?.node?.mediaItemUrl}
+                        url={`/${node.slug}`}
+                    />
+                ))}
+            </section>
+        </main>
+    </div>
 </SiteLayout>
+
+<style>
+    section {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
