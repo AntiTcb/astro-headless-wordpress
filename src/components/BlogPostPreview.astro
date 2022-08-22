@@ -16,7 +16,7 @@ const { title, description, excerpt, publishDate, featuredImage, url } = Astro.p
         <a href={url}><h1 class="title">{title}</h1></a>
         <time>{new Date(publishDate).toLocaleString()}</time>
     </header>
-    <p set:html={excerpt} />
+    <div set:html={excerpt} />
     <img src={featuredImage} />
     <a href={url}>Read more</a>
 </article>
