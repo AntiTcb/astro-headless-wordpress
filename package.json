@@ -12,14 +12,21 @@
     "@astrojs/preact": "^0.5.2",
     "@astrojs/svelte": "^1.0.0",
     "@astrojs/tailwind": "^0.2.5",
-    "@astrojs/vercel": "^1.0.0",
-    "astro": "^1.0.6",
+    "@astrojs/vercel": "^2.0.0",
+    "@brainandbones/skeleton": "^0.37.32",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/line-clamp": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.7",
+    "astro": "^1.2.8",
+    "graphql": "^16.6.0",
     "graphql-request": "^4.3.0",
-    "svelte": "^3.49.0"
+    "svelte": "^3.50.1"
   },
   "dependencies": {
-    "@astrojs/rss": "^1.0.0",
-    "dotenv": "^16.0.1",
-    "preact": "^10.10.6"
+    "@astrojs/rss": "^1.0.1",
+    "dotenv": "^16.0.2",
+    "preact": "^10.11.0",
+    "tailwindcss": "^3.1.8"
   }
 }
